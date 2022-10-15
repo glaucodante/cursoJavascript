@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de JavasScript</title>
+    <link rel="stylesheet" href="../css/aula11.css" />
+
+</head>
+<!-- onscroll="rolouPagina()" -->
+
+<body onload="carregou()">
+    <main class="tela-principal">
+        <h1 id="titulo" onmouseover="focou()">Aula 11</h1>
+        <section class="conteudo">
+            <article class="box"></article>
+            <article class="box"></article>
+            <button id="btn1" class="botão">Box 1</button>
+            <button id="btn2" class="botão">Box 2</button>
+        </section>
+        <hr />
+        <form action="">
+            <input id="cxtexto" type="text" placeholder="Digite seu nome" onfocus="focoNoCampo()"
+                onFocusOut="semFocoNoCampo()" onkeypress="avisarQueTeclou()" />
+            <button id="btn3" class="botão" type="submit">Enviar</button>
+        </form>
+    </main>
+    <!-- É recomendável chamar os arquivos JS aqui no final do body -->
+    <script src="../js/aula11.js"></script>
+</body>
+
+</html>
