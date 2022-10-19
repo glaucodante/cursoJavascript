@@ -3,6 +3,10 @@
 let aviso = document.querySelector('#aviso')
 let formulario = document.querySelector('form')
 
+
+// ID = é selecionado com #
+// CLASS = é selecionado com .
+
 let btnCalcular = document.querySelector('#btnCalcular')
 let btnLimpar = document.querySelector('#btnLimpar')
 
