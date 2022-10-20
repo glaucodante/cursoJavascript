@@ -21,11 +21,17 @@ function gerarNumeroSecreto() {
 }
 
 function bloquearBtnChutar() {
-    btnChutar.setAttribute('disable', 'disable')
-    btnChutar.removeAttribute('disable')
-    btnChutar.style.cursor = 'pointer'
+    btnChutar.setAttribute('disabled', 'disabled')
+    btnChutar.style.background = '#ccc'
+    btnChutar.style.cursor = 'not-allowed'
+    
 }
 
+function ativarBtnChutar() {
+    btnChutar.removeAttribute('disabled')
+    btnChutar.style.background = '#222'
+    btnChutar.style.cursor = 'pointer'
+}
 // validação do numero digitado
 function validarNumeroDigitado(numero) {
     if(numero <= 0 || numero > 10) { 
@@ -44,7 +50,7 @@ function tocarMusicaDeFundo() {
 }
 function ativarDesativarMusica() {
    if(musica.muted) {
-    musica.muted = flase;
+    musica.muted = false;
    } else {
     musica.muted = true;
    }
@@ -66,4 +72,53 @@ function mensagemRapida(mensagem) {
         aviso.classList.remove('errou')
         inputNumero.value = ''
     }, 3000)
+}
+
+function gameOver(situacao) {
+    switch (situacao) {
+        
+        case 'Acertou':
+            aviso.classList.add('acertou')
+            mensagemRapida('Acertou, o número secreto era ' + numeroSecreto)
+            break
+        
+        case 'Chute maior':
+            mensagemRapida('Chute maior que o número secreto')
+            aviso.classList.add('errou')
+            break
+        case 'Chute menor':
+            aviso.classList.add('errou')
+            mensagemRapida('Chute menor que o número secreto')
+            break
+
+            default:
+                console.log('Informe a Situação')
+    } // fim do switch case
+}
+
+function verificarSeAcertou() {
+    // pegar o valor do input número digitado e converter para inteiro
+    // parseInt => para converter o número para inteiro
+    chute = parseInt(document.querySelector('#inputNumero').value)
+
+    console.log('Nº do Chute ' + contador)
+    console.log('Chute ' + chute)
+
+    if(numeroSecreto === chute) {
+        console.log('Acertou')
+        situacao = 'Acertou'
+        gameOver(situacao)
+        gerarNumeroSecreto() // gerar novo numero secreto 
+    } else if (chute > numeroSecreto) {
+        console.log('Chute maior')
+        situacao = 'Chute maior'
+        gameOver(situacao)
+    } else if (chute < numeroSecreto) {
+        console.log('Chute menor')
+        situacao = 'Chute menor'
+        gameOver(situacao)
+    } else {
+        console.log('Impossível verificar se acertou!')
+    }
+
 }
