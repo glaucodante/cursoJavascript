@@ -135,6 +135,7 @@ label:first-child {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    
 }
 
 /* Animar o input */
