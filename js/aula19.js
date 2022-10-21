@@ -45,4 +45,4 @@ function zerar() {
     numeroF.value = fahrenheit.value
     numeroK.value = kelvin.value
 }
-
+// por convensão sempre deixar uma linha vazia ao final do código
