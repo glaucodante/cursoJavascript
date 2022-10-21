@@ -1,4 +1,4 @@
-/* QUIZ */
+/* PUTZ QUIZ 2.0 */
 /* Neste exercício é utilizada uma nova abordagem */
 
 let titulo = document.querySelector('h1')
@@ -7,6 +7,11 @@ let aviso = document.querySelector('#aviso')
 // let respostaEsta = document.querySelector('#respostaEsta')
 let pontos = 0 // pontos para o placar
 let placar = 0 
+
+// Audio
+let somAcerto = document.querySelector('#somAcerto')
+let somErro = document.querySelector('#somErro')
+let somAplausos = document.querySelector('#somAplausos')
 
 // Pergunta
 let numQuestao = document.querySelector('#numQuestao')
@@ -75,8 +80,54 @@ const q5 = {
     correta      : "América",
 }
 
+const q6 = {
+    numQuestao   : 6,
+    pergunta     : "Qual é o clima predominante do Brasil?",
+    alternativaA : "Polar",
+    alternativaB : "Tropical",
+    alternativaC : "Desértico",
+    alternativaD : "Temperado do Norte",
+    correta      : "Tropical",
+}
+const q7 = {
+    numQuestao   : 7,
+    pergunta     : "Poente é o mesmo que...",
+    alternativaA : "Lado onde o sol se põe",
+    alternativaB : "Lado onde o sol nasce",
+    alternativaC : "Abaixo do Equador",
+    alternativaD : "Acima do Equador",
+    correta      : "Lado onde o sol se põe",
+}
+const q8 = {
+    numQuestao   : 8,
+    pergunta     : "O Brasil se localiza em qual continente?",
+    alternativaA : "África",
+    alternativaB : "Europa",
+    alternativaC : "Oceania",
+    alternativaD : "América",
+    correta      : "América",
+}
+const q9 = {
+    numQuestao   : 9,
+    pergunta     : "Qual é a única capital do Brasil cortada pela linha do Equador?",
+    alternativaA : "Belém",
+    alternativaB : "São Luís",
+    alternativaC : "Macapá",
+    alternativaD : "Boa Vista",
+    correta      : "Macapá",
+}
+const q10 = {
+    numQuestao   : 10,
+    pergunta     : "Considerando a extensão territorial o Brasil é o ...",
+    alternativaA : "3º maior",
+    alternativaB : "2º maior",
+    alternativaC : "4º maior",
+    alternativaD : "5º maior",
+    correta      : "5º maior",
+}
+
 // Constante com um array de objetos com todas as questões
-const questoes = [q0,q1,q2,q3,q4,q5]
+const questoes = [q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10]
 
 let numero = document.querySelector('#numero')
 let total = document.querySelector('#total')
@@ -115,16 +166,36 @@ function proximaQuestao(nQuestao) {
     c.setAttribute('value', nQuestao+'C')
 }
 
+// Verificar duplo click nas alternativas
+alternativas.addEventListener('dblclick', () => {
+    // console.log('Duplo Clique')
+    pontos -= 10 // tirar 10 pontos em caso de duplo click
+    if(numQuestao.value == 10 && pontos == 110) {pontos = 100}
+})
+
+// simplifiquei bloquear e desbloquear
 function bloquearAlternativas() {
-    a.classList.add('bloqueado')
-    b.classList.add('bloqueado')
-    c.classList.add('bloqueado')
+    alternativas.classList.add('bloqueado')
 }
 
 function desbloquearAlternativas() {
-    a.classList.remove('bloqueado')
-    b.classList.remove('bloqueado')
-    c.classList.remove('bloqueado')
+    alternativas.classList.remove('bloqueado')
+    
+}
+
+function piscarNoAcerto() {
+    articleQuestoes.classList.remove('errou')
+    articleQuestoes.classList.add('acertou')
+}
+
+function piscarNoErro() {
+    articleQuestoes.classList.remove('acertou')
+    articleQuestoes.classList.add('errou')
+}
+
+function tirarPiscar() {
+    articleQuestoes.classList.remove('acertou')
+    articleQuestoes.classList.remove('errou')
 }
 
 function verificarSeAcertou(nQuestao, resposta) {
@@ -140,10 +211,16 @@ function verificarSeAcertou(nQuestao, resposta) {
     if(respostaEscolhida == certa) {
         // console.log('Acertou!')
         // respostaEsta.textContent = 'Correta 🙂'
+        piscarNoAcerto()
+        somAcerto.play()
         pontos += 10 // pontos recebe pontos  + 10
+        // prevenção de erro para não ter duplicidade na contagem dos pontos
+        if(nQuestao.value == 1 && pontos ==20) {pontos=10}
     } else {
         // console.log('Errou!')
         // respostaEsta.textContent = 'Errada 😰'
+        piscarNoErro()
+        somErro.play()
     }
 
     // Atualizar o placar
@@ -163,11 +240,13 @@ function verificarSeAcertou(nQuestao, resposta) {
         } else {
             proximaQuestao(proxima)
         }
+        tirarPiscar()
     }, 250)
     desbloquearAlternativas()
 }
 
 function fimDoJogo() {
+    somAplausos.play()
     instrucoes.textContent = "Fim do Jogo!"
     numQuestao.textContent =""
 
