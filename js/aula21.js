@@ -173,7 +173,7 @@ alternativas.addEventListener('dblclick', () => {
     if(numQuestao.value == 10 && pontos == 110) {pontos = 100}
 })
 
-// simplifiquei bloquear e desbloquear
+// simplifiquei o bloquear e desbloquear
 function bloquearAlternativas() {
     alternativas.classList.add('bloqueado')
 }
@@ -247,30 +247,26 @@ function verificarSeAcertou(nQuestao, resposta) {
 
 function fimDoJogo() {
     somAplausos.play()
-    instrucoes.textContent = "Fim do Jogo!"
-    numQuestao.textContent =""
 
-    let pont = ''
-    pontos == 0 ? pont = 'ponto' : pont = 'pontos'
+    let s = 's'
+    pontos == 0 ? s = '' : s = s
+    instrucoes.textContent = 'Fim de Jogo! Você conseguiu ' + pontos + " ponto"+ s
 
-    pergunta.textContent = "Você conseguiu "+pontos+ " "+pont
+    instrucoes.classList.add('placar')
 
-    aviso.textContent = "Você conseguiu "+pontos+ " "+pont
-
-    a.textContent =""
-    b.textContent =""
-    c.textContent =""
-
-    a.setAttribute('value', '0')
-    b.setAttribute('value', '0')
-    c.setAttribute('value', '0')
-
-   // Ocultar o article da questão
+    // Ocultar o article da questão
     articleQuestoes.style.display = 'none'
 
-    setTimeout(function(){
-        pontos = 0 // zerar o placar
-        location.reload();
-    }, 2000)
+    setTimeout(function() {
+        pontos = 0 // zerar placar
+        // location.reload();
+        instrucoes.classList.remove('placar')
+
+        // Reiniciar o jogo
+        articleQuestoes.style.display = 'block'
+        proximaQuestao(1)
+        instrucoes.textContent = 'Leia a questão e clique na resposta correta'
+    }, 8000)
+
 }
 // por convensão sempre deixar uma linha vazia ao final do código
