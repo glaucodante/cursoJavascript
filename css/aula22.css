@@ -1,16 +1,25 @@
-/* Aula 21 Putz Quiz 2.0 */
+/* Aula 22 Putz Quiz 3.0 */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
-/* vermelho #f44336 ou #d50000 verde #4caf50 ou #1b5e20  */
+/* Exemplo de combinações de Cores
+    verde     #4caf50 #1b5e20
+    vermelho  #f44336 #b71c1c
+    azul      #2196f3 #0d47a1
+    roxo      #9c270  #4a148c
+*/
+
 :root {
-    --principal: #03a9f4;
-    --secundaria: #0d47a1;
-    --azul-escuro: #0d47a1;
+    --principal: #0d47a1;
+    --secundaria: #2196f3;
+
     --cinza-escuro: #222;
-    --branco: #fff;
-    --verde: #4caf50;
-    --vermelho: #f44336;
+    --escuro:  #191919;
+    --preto: #000;
+    --branco: #fff;    
+    
+    --acerto: #4caf50;
+    --erro: #f44336;
 }
 
 * {
@@ -24,19 +33,18 @@
 body {
     width: 100vw;
     height: 100vh;
-    background: #ececec;
-    color: #191919;
     overflow-x: hidden;
 }
 
 main {
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 section {
-    width: 100vw;
-
+    margin: 0 auto;
+    padding: 1rem;
+    margin-bottom: 0.625rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +54,7 @@ section {
 h1 {
     text-align: center;
     font-size: 1.75rem;
-    margin: 0.5rem 0 0 0;
+    margin: 0 0 0.5rem 0;
 }
 
 /* classe para centralizar textos, paragrafos */
@@ -55,83 +63,89 @@ h1 {
 }
 
 /* div class questao com numero da questao e pergunta */
-.questao {
+.topoQuestao {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    
+    padding: 0.5rem;
+    background: #fff transparent;
+    color: var(--escuro);
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid #ececec;
 }
 
-#numQuestao {
+#nQuestao {
+    font-weight: bold;    
+    width: 40px;
+    height: 40px;
     text-align: center;
-    width: 2rem;
-    height: 2rem;
     display: block;
-    background: var(--principal);
-    color: #fff;
-    padding: 6px 10px 4px 8px;
-    border-radius: 50%;
+    background: var(--secundaria);
+    color: var(--branco);
+    padding: 4px 2px;
+    border-radius: 5px;
 }
 
 #pergunta {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
-
+/*
 .imagemDaQuestao {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+*/
 /* article que acomoda a questao completa */
-.questoes {
-    user-select: none;
-    background: #fff;
-
-    padding: 1.5rem 1.5rem 1rem 1.5rem;
+.questao {
+    max-width: 480px;
+    /* padding: 1.5rem 1.5rem 1rem 1.5rem; */
     border: 1px solid #ececec;
-    border-radius: 5px;
-    margin-bottom: 0.625rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
 }
 
-.questoes ol li {
-    border: 1px solid var(--principal);
+.questao ol li {
+    user-select: none;
     display: block;
-    margin-bottom: 0.625rem;
+    margin: 1rem;
     padding: 1rem;
     border-radius: 8px;
+    border: 1px solid var(--secundaria);
 }
 
-.questoes ol li:hover {
-    background: var(--principal);
+.questao ol li:hover {
+    background: var(--secundaria);
     cursor: pointer;
 }
 
-.bloqueado {
+/* .bloqueado {
     display: none;
 }
 
 .bloqueado li:hover {
     display: none;
 }
-
+*/
 #instrucoes {
-    font-size: 1rem;
+    background: #ccc;
     color: #191919;
     padding: 0.625rem;
     border-radius: 8px;
-
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
 #aviso {
-    color: var(--principal);
+    color: var(--secundaria);
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-#autoria {
-    margin-top: 0.625rem;
-    font-size: 0.75rem;
+#autoria {   
+    font-size: 1rem;
 }
 
 /* ANIMACAO */
@@ -139,11 +153,11 @@ h1 {
 /* Animar o input */
 @keyframes piscar {
     0% {
-        filter: drop-shadow(0 0 15px var(--principal));
-        -webkit-filter: drop-shadow(0 0 15px var(--principal));
-        -moz-filter: drop-shadow(0 0 15px var(--principal));
-        -o-filter: drop-shadow(0 0 15px var(--principal));
-        -ms-filter: drop-shadow(0 0 15px var(--principal));
+        filter: drop-shadow(0 0 15px #00b0ff);
+        -webkit-filter: drop-shadow(0 0 15px #00b0ff);
+        -moz-filter: drop-shadow(0 0 15px #00b0ff);
+        -o-filter: drop-shadow(0 0 15px #00b0ff);
+        -ms-filter: drop-shadow(0 0 15px #00b0ff);
     }
     100% {
     }
@@ -161,9 +175,6 @@ h1 {
     0% {
         opacity: 0;
     }
-    50% {
-        opacity: 0.5;
-    }
     100% {
         opacity: 1;
     }
@@ -178,10 +189,11 @@ h1 {
     background: var(--vermelho);
     animation: aparecer 0.1s infinite alternate;
 }
-
+/*
 .placar {
     padding: 1rem;
     border-radius: 8px;
     background:#03a9f4;
     font-size: 2rem;
 }
+*/
