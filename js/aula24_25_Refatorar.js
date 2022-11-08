@@ -128,7 +128,8 @@ desenharCarta(3)
 desenharCarta(4)
 desenharCarta(5)
 desenharCarta(6)
-desenharCarta(7)
-desenharCarta(8)
-desenharCarta(9)
+// desenharCarta(7)
+// desenharCarta(8)
+// desenharCarta(9)
 
+// por convensão sempre deixar uma linha vazia ao final do código
